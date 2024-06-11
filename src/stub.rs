@@ -28,7 +28,7 @@ impl<C: ILazyClient> Stub<C> {
 
 #[async_trait]
 impl<C: ILazyClient> IDgraphClient for Stub<C> {
-    #[instrument(skip(self))]
+    #[instrument(skip(self), level = "debug")]
     async fn login(&mut self, login: LoginRequest) -> Result<DgraphResponse> {
         trace!("login");
         let request = Request::new(login);
@@ -46,7 +46,7 @@ impl<C: ILazyClient> IDgraphClient for Stub<C> {
         }
     }
 
-    #[instrument(skip(self))]
+    #[instrument(skip(self), level = "debug")]
     async fn query(&mut self, query: DgraphRequest) -> Result<DgraphResponse> {
         trace!("query");
         let request = Request::new(query);
@@ -64,7 +64,7 @@ impl<C: ILazyClient> IDgraphClient for Stub<C> {
         }
     }
 
-    #[instrument(skip(self))]
+    #[instrument(skip(self), level = "debug")]
     #[cfg(feature = "dgraph-1-0")]
     async fn mutate(&mut self, mu: Mutation) -> Result<Assigned> {
         trace!("mutate");
@@ -83,7 +83,7 @@ impl<C: ILazyClient> IDgraphClient for Stub<C> {
         }
     }
 
-    #[instrument(skip(self))]
+    #[instrument(skip(self), level = "debug")]
     #[cfg(any(feature = "dgraph-1-1", feature = "dgraph-21-03"))]
     async fn do_request(&mut self, req: DgraphRequest) -> Result<DgraphResponse> {
         trace!("do_request");
@@ -102,7 +102,7 @@ impl<C: ILazyClient> IDgraphClient for Stub<C> {
         }
     }
 
-    #[instrument(skip(self))]
+    #[instrument(skip(self), level = "debug")]
     async fn alter(&mut self, op: Operation) -> Result<Payload> {
         trace!("alter");
         let request = Request::new(op);
@@ -120,7 +120,7 @@ impl<C: ILazyClient> IDgraphClient for Stub<C> {
         }
     }
 
-    #[instrument(skip(self))]
+    #[instrument(skip(self), level = "debug")]
     async fn commit_or_abort(&mut self, txn: TxnContext) -> Result<TxnContext> {
         trace!("commit_or_abort");
         let request = Request::new(txn);
@@ -138,7 +138,7 @@ impl<C: ILazyClient> IDgraphClient for Stub<C> {
         }
     }
 
-    #[instrument(skip(self))]
+    #[instrument(skip(self), level = "debug")]
     async fn check_version(&mut self) -> Result<Version> {
         trace!("check_version");
         let request = Request::new(Check {});

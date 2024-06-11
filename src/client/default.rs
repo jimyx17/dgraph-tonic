@@ -144,7 +144,7 @@ impl Client {
     /// let client = Client::new("http://127.0.0.1:19080").expect("Dgraph client");
     /// ```
     ///
-    #[instrument]
+    #[instrument(level = "debug")]
     pub fn new<S: TryInto<Uri>, E: Into<Endpoints<S>> + Debug>(endpoints: E) -> Result<Self> {
         let extra = Http {
             clients: Self::init_clients(endpoints, None)?,
@@ -193,7 +193,7 @@ impl Client {
     /// let client = Client::new_with_endpoint_config("http://127.0.0.1:19080", endpoint_config).expect("Dgraph client");
     /// ```
     ///
-    #[instrument]
+    #[instrument(level = "debug")]
     pub fn new_with_endpoint_config<
         S: TryInto<Uri>,
         E: Into<Endpoints<S>> + Debug,
